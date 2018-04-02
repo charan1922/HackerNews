@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
+import React, { Component } from "react";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
 class CreateLink extends Component {
   state = {
-    description: '',
-    url: '',
-  }
+    description: "",
+    url: ""
+  };
 
   render() {
     return (
@@ -28,18 +28,19 @@ class CreateLink extends Component {
         </div>
         <button onClick={() => this._createLink()}>Submit</button>
       </div>
-    )
+    );
   }
 
   _createLink = async () => {
-    const { description, url } = this.state
+    const { description, url } = this.state;
     await this.props.postMutation({
       variables: {
         description,
         url
       }
-    })
-  }
+    });
+    this.props.history.push("/");
+  };
 }
 
 // 1
@@ -53,7 +54,7 @@ const POST_MUTATION = gql`
       description
     }
   }
-`
+`;
 
 // 3
-export default graphql(POST_MUTATION, { name: 'postMutation' })(CreateLink)
+export default graphql(POST_MUTATION, { name: "postMutation" })(CreateLink);
